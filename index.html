@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Contact Manager</title>
+        <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+        <link href="css/bootstrap-theme.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="css/contact_manager.css" />
+    </head>
+    <body>
+        <!--main div container-->
+        <div id="appContainer">
+            <header>
+				<h1>Contact Manager</h1>
+                <button id="add_btn">Add Contact</button>
+                <button id="showList">Contact List</button><br>
+                Search by: <select>
+                    <option value="first_name">First Name</option>
+                    <option value="last_name">Last Name</option>
+                    <option value="phone_number">Phone Number</option>
+                    <option value="email_address">Email Address</option>
+                </select> <input id="searchBar" type="text" placeholder="Search here">
+                
+            </header>
+            
+
+            <!--field for new contact-->
+            <section id="addSection">            
+                <p><input class="input" id="first_name" type="text" placeholder="First Name"> *</p>
+                <p><input class="input" id="last_name" type="text" placeholder="Last Name"> *</p>
+                <p><input class="input" id="phone_number" type="text" placeholder="Phone Number"></p>
+                <p><input class="input" id="email_address" type="email" placeholder="Email Address"></p>
+                <button id="add-btn">Add</button>
+            </section>
+
+            <!--section for the list of contacts-->
+            <div id="cont">
+                <section id="main">
+                    <input id="toggle-all" type="checkbox">Select all <br>
+
+                    <!--unordered list where each new contactView will be added-->
+                    <ul id="contact-list"></ul>
+                </section>
+            </div>
+
+            <div id="footer">
+                <footer></footer>
+            </div>
+
+            <div id="suggest">
+                <p>Double click to edit.</p>
+            </div>
+        </div>
+
+        <!--Templates-->
+        <script type="text/template" id="contact-template">
+            <div class="view">
+                <input class="toggle" type="checkbox" <%= selected ? 'checked' :'' %> />
+                <label class="labels"><%- first_name %>&nbsp;<%- last_name %></label><br>
+                <div class="details">
+                    Phone Number: <%- phone_number %><br>
+                    Email: <a href="mailto:<%= email %>" target="_blank"><%= email %></a><br>
+                    <button id="edit-btn">Edit</button>
+                </div>
+                <a class="destroy">Delete</a>
+            </div>
+        </script>
+
+        <script type="text/template" id="edit-template">
+            <div>
+                <label>
+                    <input class="edit" id="first_name" value="<%- first_name %>">*
+                    <input class="edit" id="last_name" value="<%- last_name %>">*
+                </label><br>
+                Phone Number: <input class="edit" id="phone_number" value="<%- phone_number %>"><br>
+                Email: <input class="edit" id="email_address" value="<%- email %>" type="email"><br>
+                <button id="update-btn">Update</button>
+                <button id="cancel-btn">Cancel</button>
+            </div>
+        </script>
+
+        <script type="text/template" id="stats-tmpl">
+            <% if (selected) {%>
+                <a id="clear-selected">Delete <%- selected %> selected <%- selected==1 ? 'contact':'contacts'%></a> 
+            <% } %>
+            <div class="count">Total: <%- total %>  <%- total<=1 ? 'contact':'contacts'%></div>
+        </script>
+
+        <script src="js/jquery-2.1.0.js"></script>
+        <script src="js/underscore.js"></script>
+        <script src="js/backbone.js"></script>
+        <script src="js/backbone.localStorage.js"></script>
+        <script src="js/json2.js"></script>
+        <script src="js/contact_manager.js"></script>
+        <script src="js/bootstrap.js"></script>
+    </body>
+</html>

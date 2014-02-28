@@ -1,0 +1,12 @@
+#addSection, #cont, #clear-selected, #showList, #suggest{
+	display: none;
+}
+
+div#appContainer{
+	width: 500;
+	margin: 20px auto;
+}
+
+div#appContainer > header{
+	margin-bottom: 20px;
+}
